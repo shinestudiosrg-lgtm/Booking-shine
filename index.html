@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shine Self Photo Studio</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #7a0c0c;
+        margin: 0;
+        padding: 0;
+        color: white;
+    }
+
+    header {
+        background: #8f0f0f;
+        padding: 20px;
+        text-align: center;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    nav {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        background: #5a0909;
+        padding: 10px;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .page {
+        display: none;
+        padding: 20px;
+        max-width: 600px;
+        margin: auto;
+    }
+
+    .active {
+        display: block;
+    }
+
+    .card {
+        background: rgba(255,255,255,0.15);
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    input, select {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border-radius: 5px;
+        border: none;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        background: #d60000;
+        color: white;
+        font-weight: bold;
+        margin-top: 10px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    pre {
+        background: rgba(0,0,0,0.4);
+        padding: 10px;
+        border-radius: 10px;
+        color: #fff;
+        white-space: pre-wrap;
+    }
+
+    h2 {
+        text-align: center;
+        margin-top: 0;
+    }
+
+    .package-title {
+        font-size: 20px;
+        margin-top: 15px;
+        font-weight: bold;
+        border-bottom: 1px solid rgba(255,255,255,0.4);
+        padding-bottom: 5px;
+    }
+
+</style>
+
+</head>
+<body>
+
+<header>Shine Self Photo Studio</header>
+
+<nav>
+    <a onclick="showPage('booking')">Booking</a>
+    <a onclick="showPage('pricelist')">Price List</a>
+</nav>
+
+<!-- BOOKING PAGE -->
+<div id="booking" class="page active">
+    <h2>Form Booking</h2>
+
+    <div class="card">
+        <label>Nama Customer:</label>
+        <input id="nama">
+
+        <label>Jumlah Orang:</label>
+        <input id="jumlah">
+
+        <label>Pilih Paket:</label>
+        <select id="paket">
+            <option>BASIC - Foto Studio 15k / Foto Box 10k</option>
+            <option>PREMIUM - Foto Studio 25k / Foto Box 20k</option>
+            <option>GOLD - Foto Studio 35k / Foto Box 25k</option>
+            <option>SPECIAL - Bundling 80k / Grup 150k / Family 200k</option>
+        </select>
+
+        <label>Tanggal Booking:</label>
+        <input type="date" id="tanggal">
+
+        <label>Jam Booking:</label>
+        <input type="time" id="jam">
+
+        <label>Kontak WA:</label>
+        <input id="wa">
+    </div>
+
+    <button onclick="generate()">Generate Booking</button>
+
+    <pre id="output"></pre>
+
+    <button onclick="copyText()">Copy</button>
+    <button onclick="sendWA()">Kirim ke WhatsApp Admin</button>
+</div>
+
+<!-- PRICE LIST PAGE -->
+<div id="pricelist" class="page">
+    <h2>PRICE LIST</h2>
+
+    <div class="card">
+        <div class="package-title">BASIC PACKAGE</div>
+        Wide Box — 10k<br>
+        Foto Studio — 15k
+    </div>
+
+    <div class="card">
+        <div class="package-title">PREMIUM PACKAGE</div>
+        Wide Box — 20k<br>
+        Foto Studio — 25k
+    </div>
+
+    <div class="card">
+        <div class="package-title">GOLD PACKAGE</div>
+        Wide Box — 25k<br>
+        Foto Studio — 35k
+    </div>
+
+    <div class="card">
+        <div class="package-title">SPECIAL PACKAGE</div>
+        Bundling — 80k<br>
+        Group — 150k<br>
+        Family / Graduation — 200k
+    </div>
+</div>
+
+<script>
+function showPage(page) {
+    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+    document.getElementById(page).classList.add("active");
+}
+
+function generate() {
+    let nama = document.getElementById("nama").value;
+    let jumlah = document.getElementById("jumlah").value;
+    let paket = document.getElementById("paket").value;
+    let tanggal = document.getElementById("tanggal").value;
+    let jam = document.getElementById("jam").value;
+    let wa = document.getElementById("wa").value;
+
+    let text = 
+`📸 *BOOKING SHINE SELF PHOTO STUDIO*
+━━━━━━━━━━━━━━━━━━
+👤 Nama: ${nama}
+👥 Jumlah Orang: ${jumlah}
+📦 Paket: ${paket}
+📅 Tanggal: ${tanggal}
+⏰ Jam: ${jam}
+📱 Kontak WA: ${wa}
+━━━━━━━━━━━━━━━━━━
+Terima kasih sudah booking 🤍`;
+
+    document.getElementById("output").innerText = text;
+}
+
+function copyText() {
+    let text = document.getElementById("output").innerText;
+    navigator.clipboard.writeText(text);
+    alert("Berhasil di-copy!");
+}
+
+function sendWA() {
+    let text = document.getElementById("output").innerText;
+    if (!text) return alert("Generate dulu!");
+
+    let nomor = "6283894036552"; 
+    let url = "https://wa.me/" + nomor + "?text=" + encodeURIComponent(text);
+
+    window.open(url, "_blank");
+}
+</script>
+
+</body>
+</html>

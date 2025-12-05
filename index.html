@@ -1,292 +1,419 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shine Self Photo Studio</title>
-
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Shine Self Photo Studio — Booking</title>
+<link rel="preconnect" href="https://fonts.gstatic.com">
 <style>
-    body {
-        font-family: 'Poppins', sans-serif;
-        background: linear-gradient(135deg, #003f7d, #001f3f);
-        margin: 0;
-        padding: 0;
-        color: white;
-    }
+  /* ===== FONT ===== */
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap');
 
-    header {
-        background: rgba(255, 210, 0, 0.25);
-        padding: 20px;
-        text-align: center;
-        font-size: 30px;
-        font-weight: 600;
-        letter-spacing: 1px;
-        backdrop-filter: blur(6px);
-        border-bottom: 2px solid rgba(255, 210, 0, 0.4);
-    }
+  :root{
+    --blue-900: #003f7d;
+    --blue-700: #0056a6;
+    --yellow: #ffd000;
+    --muted: #f5f8fb;
+    --card-bg: rgba(255,255,255,0.96);
+    --accent: #063b71;
+  }
 
-    nav {
-        display: flex;
-        justify-content: center;
-        gap: 25px;
-        background: rgba(255, 255, 255, 0.08);
-        padding: 12px;
-        backdrop-filter: blur(4px);
-        border-bottom: 1px solid rgba(255,255,255,0.15);
-    }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    background: linear-gradient(180deg, #e9f6ff 0%, #fff9e6 100%);
+    color: var(--accent);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    padding:24px;
+  }
 
-    nav a {
-        color: #ffd700;
-        text-decoration: none;
-        font-weight: 600;
-        cursor: pointer;
-        padding: 6px 14px;
-        border-radius: 6px;
-        transition: 0.3s;
-    }
+  /* Header */
+  header{
+    max-width:1100px;
+    margin:0 auto 18px;
+    display:flex;
+    align-items:center;
+    gap:18px;
+  }
+  .brand {
+    background: linear-gradient(90deg, rgba(0,63,125,1), rgba(0,86,166,1));
+    color: white;
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-weight:800;
+    font-size:20px;
+    box-shadow: 0 6px 18px rgba(3,59,103,0.18);
+  }
+  header .subtitle { color: var(--blue-700); font-weight:700; margin-left:6px; font-size:18px; }
 
-    nav a:hover {
-        background: rgba(255, 215, 0, 0.2);
-        color: white;
-    }
+  /* layout */
+  .container{
+    max-width:1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 24px;
+    align-items:start;
+  }
 
-    .page {
-        display: none;
-        padding: 25px;
-        max-width: 600px;
-        margin: auto;
-    }
+  /* left column: booking form & price list */
+  .left {
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+  }
 
-    .active {
-        display: block;
-    }
+  /* card style */
+  .card{
+    background: var(--card-bg);
+    border-radius:14px;
+    padding:18px;
+    box-shadow: 0 8px 30px rgba(7,41,82,0.08);
+    border: 1px solid rgba(0,63,125,0.06);
+  }
 
-    .card {
-        background: rgba(255, 255, 255, 0.15);
-        padding: 18px;
-        border-radius: 12px;
-        margin-bottom: 15px;
-        border: 1px solid rgba(255, 215, 0, 0.3);
-    }
+  label{ display:block; font-weight:700; margin-bottom:6px; color:var(--accent); }
+  input[type="text"], input[type="date"], input[type="time"], input[type="number"], select {
+    width:100%; padding:11px 12px; border-radius:10px; border:1px solid rgba(3,59,103,0.08);
+    font-size:15px; outline:none; background: #fff;
+  }
 
-    input, select {
-        width: 100%;
-        padding: 12px;
-        margin-top: 6px;
-        border-radius: 8px;
-        border: none;
-        font-size: 14px;
-    }
+  /* buttons */
+  .btn-primary{
+    background: linear-gradient(90deg,var(--yellow),#ffea66);
+    border:none;
+    color: var(--blue-900);
+    padding:12px 14px;
+    border-radius:10px;
+    font-weight:800;
+    width:100%;
+    cursor:pointer;
+    box-shadow: 0 8px 18px rgba(255,208,0,0.18);
+    margin-top:10px;
+  }
+  .btn-ghost{
+    background:transparent;
+    border:2px solid rgba(0,63,125,0.08);
+    color:var(--accent);
+    padding:10px 12px;
+    border-radius:10px;
+    cursor:pointer;
+    margin-top:8px;
+  }
 
-    button {
-        width: 100%;
-        padding: 14px;
-        border: none;
-        background: #ffd000;
-        color: #002147;
-        font-weight: bold;
-        margin-top: 10px;
-        cursor: pointer;
-        border-radius: 6px;
-        font-size: 15px;
-        transition: 0.3s;
-    }
+  pre#output{
+    background: #003f7d;
+    color: white;
+    padding:12px;
+    border-radius:8px;
+    white-space:pre-wrap;
+    font-size:14px;
+    margin-top:10px;
+  }
 
-    button:hover {
-        background: #ffeb57;
-    }
+  /* price HTML list */
+  .price-list-panel{
+    padding:12px;
+    border-radius:12px;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 12px 40px rgba(2,45,86,0.10);
+    border: 1px solid rgba(0,63,125,0.08);
+  }
 
-    pre {
-        background: rgba(0,0,0,0.4);
-        padding: 15px;
-        border-radius: 10px;
-        color: #fff;
-        white-space: pre-wrap;
-        font-size: 14px;
-        border: 1px solid rgba(255, 215, 0, 0.3);
-    }
+  .price-section{
+    margin-bottom:18px;
+    padding-bottom:12px;
+    border-bottom:1px solid rgba(0,63,125,0.08);
+  }
+  .price-section:last-child{
+    border-bottom:none;
+    margin-bottom:0;
+    padding-bottom:0;
+  }
 
-    h2 {
-        text-align: center;
-        margin-top: 0;
-        font-size: 24px;
-        font-weight: 600;
-        color: #ffd700;
-    }
+  .price-title{
+    font-weight:800;
+    font-size:18px;
+    color:var(--blue-900);
+    margin-bottom:10px;
+  }
 
-    .package-title {
-        font-size: 18px;
-        margin-top: 15px;
-        font-weight: bold;
-        color: #ffd700;
-    }
+  .price-row{
+    display:flex;
+    justify-content:space-between;
+    padding:6px 0;
+    font-weight:600;
+    color:var(--accent);
+  }
+
+  /* tutorial */
+  .tutorial{ background:#fffbe6; border:2px dashed rgba(255,208,0,0.6); padding:12px; border-radius:10px; color:var(--accent); }
+
+  /* total box */
+  .total-box{
+    margin-top:8px;
+    padding:12px;
+    border-radius:10px;
+    background: linear-gradient(180deg, rgba(0,63,125,0.06), rgba(0,63,125,0.02));
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-weight:800;
+    color:var(--blue-900);
+  }
+
+  /* responsive */
+  @media (max-width:980px){
+    .container{ grid-template-columns: 1fr; padding:0 6px; }
+    .right{ order:2; }
+  }
+
+  /* small helpers */
+  .muted{ color:#6b6b6b; font-weight:500; font-size:13px; }
+
 </style>
 </head>
 <body>
 
-<header>Shine Self Photo Studio</header>
+<header>
+  <div class="brand">Shine</div>
+  <div class="subtitle">Self Photo Studio — Serang</div>
+</header>
 
-<nav>
-    <a onclick="showPage('booking')">Booking</a>
-    <a onclick="showPage('pricelist')">Price List</a>
-</nav>
+<main class="container">
 
-<!-- BOOKING PAGE -->
-<div id="booking" class="page active">
-    <h2>Form Booking</h2>
+  <!-- LEFT COLUMN -->
+  <section class="left">
 
+    <!-- Booking Form -->
     <div class="card">
-        <label>Nama Customer:</label>
-        <input id="nama">
+      <h3 style="margin-top:0; color:var(--blue-900)">Form Booking</h3>
 
-        <label>Jumlah Orang:</label>
-        <input id="jumlah">
+      <label>Nama Customer</label>
+      <input id="nama" type="text" placeholder="Nama lengkap">
 
-        <label>Pilih Kategori:</label>
-        <select id="kategori" onchange="updatePaket()">
-            <option value="">-- Pilih Kategori --</option>
-            <option value="box">Foto Box</option>
-            <option value="studio">Foto Studio</option>
-        </select>
+      <label>Jumlah Orang</label>
+      <input id="jumlah" type="number" min="1" value="1" oninput="hitungTotal()">
 
-        <label>Pilih Paket:</label>
-        <select id="paket"></select>
+      <label>Pilih Kategori</label>
+      <select id="kategori" onchange="updatePaket()">
+        <option value="">-- Pilih Kategori --</option>
+        <option value="box">Foto Box</option>
+        <option value="studio">Foto Studio</option>
+      </select>
 
-        <label>Pilih Background:</label>
-        <select id="background"></select>
+      <label>Pilih Paket</label>
+      <select id="paket" onchange="hitungTotal()">
+        <option value="">-- Pilih paket --</option>
+      </select>
 
-        <label>Tanggal Booking:</label>
-        <input type="date" id="tanggal">
+      <label>Pilih Background</label>
+      <select id="background">
+        <option value="">-- Pilih background --</option>
+      </select>
 
-        <label>Jam Booking:</label>
-        <input type="time" id="jam">
+      <label>Tanggal</label>
+      <input id="tanggal" type="date">
 
-        <label>Kontak WA:</label>
-        <input id="wa">
+      <label>Jam</label>
+      <input id="jam" type="time">
+
+      <label>Kontak WA</label>
+      <input id="wa" type="text" placeholder="08xxxxxxxxxx">
+
+      <div class="total-box">
+        <div>Total</div>
+        <div id="totalDisplay">Rp 0</div>
+      </div>
+
+      <button class="btn-primary" onclick="generate()">Generate Booking</button>
+      <button class="btn-ghost" onclick="copyText()">Copy Pesan</button>
+      <button class="btn-ghost" onclick="sendWA()">Kirim ke WhatsApp Admin</button>
+
+      <pre id="output" aria-live="polite"></pre>
     </div>
 
-    <button onclick="generate()">Generate Booking</button>
-
-    <pre id="output"></pre>
-
-    <button onclick="copyText()">Copy</button>
-    <button onclick="sendWA()">Kirim ke WhatsApp Admin</button>
-</div>
-
-<!-- PRICE LIST PAGE -->
-<div id="pricelist" class="page">
-    <h2>PRICE LIST</h2>
-
-    <div class="card">
-        <div class="package-title">FOTO BOX</div>
-        Basic — 10k <br>
-        Premium — 15k <br>
-        Gold — 25k
+    <!-- Tutorial -->
+    <div class="card tutorial">
+      <h4 style="margin:0 0 8px 0">📘 Cara Booking</h4>
+      <ol style="margin:0 0 0 18px; padding:0; color:#123456">
+        <li>Pilih <strong>kategori</strong>.</li>
+        <li>Pilih <strong>paket</strong>.</li>
+        <li>Pilih <strong>background</strong>.</li>
+        <li>Isi <strong>jumlah orang</strong>, tanggal, dan jam.</li>
+        <li>Cek <strong>total harga</strong>.</li>
+        <li>Klik <strong>Generate Booking</strong>.</li>
+        <li>Kirim pesan ke admin.</li>
+      </ol>
+      <div class="muted" style="margin-top:8px">Format WA tanpa tanda +, contoh: 62812xxxx</div>
     </div>
 
-    <div class="card">
-        <div class="package-title">FOTO STUDIO</div>
-        Basic — 15k <br>
-        Premium — 25k <br>
-        Gold — 35k <br><br>
-        Special Bundling — 80k <br>
-        Special Group — 150k <br>
-        Special Family — 200k
+  </section>
+
+  <!-- RIGHT COLUMN -->
+  <aside class="right">
+
+    <div class="card price-list-panel">
+      <h3 style="margin:0 0 12px 0; color:var(--blue-900)">Price List</h3>
+
+      <div class="price-section">
+        <div class="price-title">FOTO BOX</div>
+        <div class="price-row"><span>Basic</span><span>10k</span></div>
+        <div class="price-row"><span>Premium</span><span>20k</span></div>
+        <div class="price-row"><span>Gold</span><span>25k</span></div>
+      </div>
+
+      <div class="price-section">
+        <div class="price-title">FOTO STUDIO</div>
+        <div class="price-row"><span>Basic</span><span>15k</span></div>
+        <div class="price-row"><span>Premium</span><span>25k</span></div>
+        <div class="price-row"><span>Gold</span><span>35k</span></div>
+        <div class="price-row"><span>Special Bundling</span><span>80k</span></div>
+        <div class="price-row"><span>Special Group</span><span>150k</span></div>
+        <div class="price-row"><span>Special Family</span><span>200k</span></div>
+      </div>
+
+      <div class="price-section">
+        <div class="price-title">ADDITIONAL</div>
+        <div class="price-row"><span>Tambahan / Orang</span><span>25k</span></div>
+        <div class="price-row"><span>Tambahan / 10 menit</span><span>20k</span></div>
+        <div class="price-row"><span>Cetakan Foto / Strip</span><span>10k</span></div>
+        <div class="price-row"><span>Cetakan Premium</span><span>15k</span></div>
+        <div class="price-row"><span>Premium Props</span><span>5k - 10k</span></div>
+      </div>
+
     </div>
-</div>
+
+    <!-- quick contact -->
+    <div class="card">
+      <h4 style="margin:0 0 8px 0; color:var(--blue-700)">Kontak & Lokasi</h4>
+      <div class="muted">📍 Perum. Persada Banten, Blok A7 no.4</div>
+      <div style="height:10px"></div>
+      <div class="muted">📱 WA Admin: <strong>+62 838-9403-6552</strong></div>
+      <button class="btn-primary" style="margin-top:8px" onclick="location.href='https://wa.me/6283894036552'">Chat Admin</button>
+    </div>
+
+  </aside>
+
+</main>
 
 <script>
+/* ===== DATA ===== */
+const paketData = {
+  box: [
+    { label: "Basic - 10k", price: 10000 },
+    { label: "Premium - 20k", price: 20000 },
+    { label: "Gold - 25k", price: 25000 }
+  ],
+  studio: [
+    { label: "Basic - 15k", price: 15000 },
+    { label: "Premium - 25k", price: 25000 },
+    { label: "Gold - 35k", price: 35000 },
+    { label: "Special Bundling - 80k", price: 80000 },
+    { label: "Special Group - 150k", price: 150000 },
+    { label: "Special Family - 200k", price: 200000 }
+  ]
+};
 
-function showPage(page) {
-    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-    document.getElementById(page).classList.add("active");
+const bgData = {
+  box: ["Coklat","Biru","Tahanan"],
+  studio: ["Beige","Sky Blue","Putih","Abu-abu","Tirai"]
+};
+
+/* ===== HELPERS ===== */
+function rupiah(n){
+  if (isNaN(n) || n === null) return "Rp 0";
+  return "Rp " + n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
-function updatePaket() {
-    let kategori = document.getElementById("kategori").value;
-    let paket = document.getElementById("paket");
-    let background = document.getElementById("background");
+/* DOM refs */
+const elKategori = document.getElementById('kategori');
+const elPaket = document.getElementById('paket');
+const elBackground = document.getElementById('background');
+const elJumlah = document.getElementById('jumlah');
+const elOutput = document.getElementById('output');
+const elTotalDisplay = document.getElementById('totalDisplay');
 
-    paket.innerHTML = "";
-    background.innerHTML = "";
+/* Events */
+function updatePaket(){
+  const k = elKategori.value;
+  elPaket.innerHTML = "<option value=''>-- Pilih paket --</option>";
+  elBackground.innerHTML = "<option value=''>-- Pilih background --</option>";
 
-    if (kategori === "box") {
-        paket.innerHTML = `
-            <option>Basic - 10k</option>
-            <option>Premium - 15k</option>
-            <option>Gold - 25k</option>
-        `;
+  if(!k) { hitungTotal(); return; }
 
-        background.innerHTML = `
-            <option>Coklat</option>
-            <option>Biru</option>
-            <option>Tahanan</option>
-        `;
-    }
+  (paketData[k]||[]).forEach(p=>{
+    const opt = document.createElement('option');
+    opt.value = p.price;
+    opt.textContent = p.label;
+    elPaket.appendChild(opt);
+  });
 
-    if (kategori === "studio") {
-        paket.innerHTML = `
-            <option>Basic - 15k</option>
-            <option>Premium - 25k</option>
-            <option>Gold - 35k</option>
-            <option>Special Bundling - 80k</option>
-            <option>Special Group - 150k</option>
-            <option>Special Family - 200k</option>
-        `;
+  (bgData[k]||[]).forEach(b=>{
+    const opt = document.createElement('option');
+    opt.value = b;
+    opt.textContent = b;
+    elBackground.appendChild(opt);
+  });
 
-        background.innerHTML = `
-            <option>Beige</option>
-            <option>Sky Blue</option>
-            <option>Putih</option>
-            <option>Abu-abu</option>
-            <option>Tirai</option>
-        `;
-    }
+  hitungTotal();
 }
 
-function generate() {
-    let nama = document.getElementById("nama").value;
-    let jumlah = document.getElementById("jumlah").value;
-    let kategori = document.getElementById("kategori").value;
-    let kategoriText = kategori === "box" ? "Foto Box" : "Foto Studio";
-    let paket = document.getElementById("paket").value;
-    let background = document.getElementById("background").value;
-    let tanggal = document.getElementById("tanggal").value;
-    let jam = document.getElementById("jam").value;
-    let wa = document.getElementById("wa").value;
+function hitungTotal(){
+  const price = Number(elPaket.value) || 0;
+  const jumlah = Number(elJumlah.value) || 0;
+  const total = price * jumlah;
+  elTotalDisplay.textContent = rupiah(total);
+  return total;
+}
 
-    let text = 
+function generate(){
+  const nama = document.getElementById('nama').value || '-';
+  const jumlah = Number(elJumlah.value) || 0;
+  const kategori = elKategori.value ? (elKategori.value === 'box' ? 'Foto Box' : 'Foto Studio') : '-';
+  const paketText = elPaket.options[elPaket.selectedIndex] ? elPaket.options[elPaket.selectedIndex].text : '-';
+  const background = elBackground.value || '-';
+  const tanggal = document.getElementById('tanggal').value || '-';
+  const jam = document.getElementById('jam').value || '-';
+  const wa = document.getElementById('wa').value || '-';
+  const total = hitungTotal();
+
+  const message =
 `📸 *BOOKING SHINE SELF PHOTO STUDIO*
 ━━━━━━━━━━━━━━━━━━
 👤 Nama: ${nama}
 👥 Jumlah Orang: ${jumlah}
-🏷 Kategori: ${kategoriText}
-📦 Paket: ${paket}
+🏷 Kategori: ${kategori}
+📦 Paket: ${paketText}
 🎨 Background: ${background}
+💰 Total Harga: ${rupiah(total)}
 📅 Tanggal: ${tanggal}
 ⏰ Jam: ${jam}
 📱 Kontak WA: ${wa}
 ━━━━━━━━━━━━━━━━━━
 Terima kasih sudah booking 🤍`;
 
-    document.getElementById("output").innerText = text;
+  elOutput.textContent = message;
+  elOutput.scrollIntoView({behavior:'smooth'});
 }
 
-function copyText() {
-    let text = document.getElementById("output").innerText;
-    navigator.clipboard.writeText(text);
-    alert("Berhasil di-copy!");
+function copyText(){
+  const text = elOutput.innerText;
+  if(!text) return alert("Generate dulu pesan bookingnya.");
+  navigator.clipboard.writeText(text).then(()=> alert("Pesan berhasil disalin!"));
 }
 
-function sendWA() {
-    let text = document.getElementById("output").innerText;
-    if (!text) return alert("Generate dulu!");
-
-    let nomor = "6283894036552";
-    let url = "https://wa.me/" + nomor + "?text=" + encodeURIComponent(text);
-
-    window.open(url, "_blank");
+function sendWA(){
+  const text = elOutput.innerText;
+  if(!text) return alert("Generate dulu pesan bookingnya.");
+  const nomor = "6283894036552";
+  const url = "https://wa.me/" + nomor + "?text=" + encodeURIComponent(text);
+  window.open(url,"_blank");
 }
+
+document.addEventListener('DOMContentLoaded', ()=> updatePaket());
 </script>
 
 </body>

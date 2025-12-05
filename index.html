@@ -7,39 +7,52 @@
 
 <style>
     body {
-        font-family: Arial, sans-serif;
-        background: #7a0c0c;
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #003f7d, #001f3f);
         margin: 0;
         padding: 0;
         color: white;
     }
 
     header {
-        background: #8f0f0f;
+        background: rgba(255, 210, 0, 0.25);
         padding: 20px;
         text-align: center;
-        font-size: 28px;
-        font-weight: bold;
+        font-size: 30px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        backdrop-filter: blur(6px);
+        border-bottom: 2px solid rgba(255, 210, 0, 0.4);
     }
 
     nav {
         display: flex;
         justify-content: center;
-        gap: 20px;
-        background: #5a0909;
-        padding: 10px;
+        gap: 25px;
+        background: rgba(255, 255, 255, 0.08);
+        padding: 12px;
+        backdrop-filter: blur(4px);
+        border-bottom: 1px solid rgba(255,255,255,0.15);
     }
 
     nav a {
-        color: white;
+        color: #ffd700;
         text-decoration: none;
-        font-weight: bold;
+        font-weight: 600;
         cursor: pointer;
+        padding: 6px 14px;
+        border-radius: 6px;
+        transition: 0.3s;
+    }
+
+    nav a:hover {
+        background: rgba(255, 215, 0, 0.2);
+        color: white;
     }
 
     .page {
         display: none;
-        padding: 20px;
+        padding: 25px;
         max-width: 600px;
         margin: auto;
     }
@@ -49,56 +62,65 @@
     }
 
     .card {
-        background: rgba(255,255,255,0.15);
-        padding: 15px;
-        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.15);
+        padding: 18px;
+        border-radius: 12px;
         margin-bottom: 15px;
-        border: 1px solid rgba(255,255,255,0.3);
+        border: 1px solid rgba(255, 215, 0, 0.3);
     }
 
     input, select {
         width: 100%;
-        padding: 10px;
-        margin-top: 5px;
-        border-radius: 5px;
+        padding: 12px;
+        margin-top: 6px;
+        border-radius: 8px;
         border: none;
+        font-size: 14px;
     }
 
     button {
         width: 100%;
-        padding: 12px;
+        padding: 14px;
         border: none;
-        background: #d60000;
-        color: white;
+        background: #ffd000;
+        color: #002147;
         font-weight: bold;
         margin-top: 10px;
         cursor: pointer;
-        border-radius: 5px;
+        border-radius: 6px;
+        font-size: 15px;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background: #ffeb57;
     }
 
     pre {
         background: rgba(0,0,0,0.4);
-        padding: 10px;
+        padding: 15px;
         border-radius: 10px;
         color: #fff;
         white-space: pre-wrap;
+        font-size: 14px;
+        border: 1px solid rgba(255, 215, 0, 0.3);
     }
 
     h2 {
         text-align: center;
         margin-top: 0;
+        font-size: 24px;
+        font-weight: 600;
+        color: #ffd700;
     }
 
     .package-title {
-        font-size: 20px;
+        font-size: 18px;
         margin-top: 15px;
         font-weight: bold;
-        border-bottom: 1px solid rgba(255,255,255,0.4);
-        padding-bottom: 5px;
+        color: #ffd700;
     }
-
 </style>
-
 </head>
 <body>
 
@@ -120,13 +142,18 @@
         <label>Jumlah Orang:</label>
         <input id="jumlah">
 
-        <label>Pilih Paket:</label>
-        <select id="paket">
-            <option>BASIC - Foto Studio 15k / Foto Box 10k</option>
-            <option>PREMIUM - Foto Studio 25k / Foto Box 20k</option>
-            <option>GOLD - Foto Studio 35k / Foto Box 25k</option>
-            <option>SPECIAL - Bundling 80k / Grup 150k / Family 200k</option>
+        <label>Pilih Kategori:</label>
+        <select id="kategori" onchange="updatePaket()">
+            <option value="">-- Pilih Kategori --</option>
+            <option value="box">Foto Box</option>
+            <option value="studio">Foto Studio</option>
         </select>
+
+        <label>Pilih Paket:</label>
+        <select id="paket"></select>
+
+        <label>Pilih Background:</label>
+        <select id="background"></select>
 
         <label>Tanggal Booking:</label>
         <input type="date" id="tanggal">
@@ -151,41 +178,79 @@
     <h2>PRICE LIST</h2>
 
     <div class="card">
-        <div class="package-title">BASIC PACKAGE</div>
-        Wide Box — 10k<br>
-        Foto Studio — 15k
+        <div class="package-title">FOTO BOX</div>
+        Basic — 10k <br>
+        Premium — 15k <br>
+        Gold — 25k
     </div>
 
     <div class="card">
-        <div class="package-title">PREMIUM PACKAGE</div>
-        Wide Box — 20k<br>
-        Foto Studio — 25k
-    </div>
-
-    <div class="card">
-        <div class="package-title">GOLD PACKAGE</div>
-        Wide Box — 25k<br>
-        Foto Studio — 35k
-    </div>
-
-    <div class="card">
-        <div class="package-title">SPECIAL PACKAGE</div>
-        Bundling — 80k<br>
-        Group — 150k<br>
-        Family / Graduation — 200k
+        <div class="package-title">FOTO STUDIO</div>
+        Basic — 15k <br>
+        Premium — 25k <br>
+        Gold — 35k <br><br>
+        Special Bundling — 80k <br>
+        Special Group — 150k <br>
+        Special Family — 200k
     </div>
 </div>
 
 <script>
+
 function showPage(page) {
     document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
     document.getElementById(page).classList.add("active");
 }
 
+function updatePaket() {
+    let kategori = document.getElementById("kategori").value;
+    let paket = document.getElementById("paket");
+    let background = document.getElementById("background");
+
+    paket.innerHTML = "";
+    background.innerHTML = "";
+
+    if (kategori === "box") {
+        paket.innerHTML = `
+            <option>Basic - 10k</option>
+            <option>Premium - 15k</option>
+            <option>Gold - 25k</option>
+        `;
+
+        background.innerHTML = `
+            <option>Coklat</option>
+            <option>Biru</option>
+            <option>Tahanan</option>
+        `;
+    }
+
+    if (kategori === "studio") {
+        paket.innerHTML = `
+            <option>Basic - 15k</option>
+            <option>Premium - 25k</option>
+            <option>Gold - 35k</option>
+            <option>Special Bundling - 80k</option>
+            <option>Special Group - 150k</option>
+            <option>Special Family - 200k</option>
+        `;
+
+        background.innerHTML = `
+            <option>Beige</option>
+            <option>Sky Blue</option>
+            <option>Putih</option>
+            <option>Abu-abu</option>
+            <option>Tirai</option>
+        `;
+    }
+}
+
 function generate() {
     let nama = document.getElementById("nama").value;
     let jumlah = document.getElementById("jumlah").value;
+    let kategori = document.getElementById("kategori").value;
+    let kategoriText = kategori === "box" ? "Foto Box" : "Foto Studio";
     let paket = document.getElementById("paket").value;
+    let background = document.getElementById("background").value;
     let tanggal = document.getElementById("tanggal").value;
     let jam = document.getElementById("jam").value;
     let wa = document.getElementById("wa").value;
@@ -195,7 +260,9 @@ function generate() {
 ━━━━━━━━━━━━━━━━━━
 👤 Nama: ${nama}
 👥 Jumlah Orang: ${jumlah}
+🏷 Kategori: ${kategoriText}
 📦 Paket: ${paket}
+🎨 Background: ${background}
 📅 Tanggal: ${tanggal}
 ⏰ Jam: ${jam}
 📱 Kontak WA: ${wa}
@@ -215,7 +282,7 @@ function sendWA() {
     let text = document.getElementById("output").innerText;
     if (!text) return alert("Generate dulu!");
 
-    let nomor = "6283894036552"; 
+    let nomor = "6283894036552";
     let url = "https://wa.me/" + nomor + "?text=" + encodeURIComponent(text);
 
     window.open(url, "_blank");

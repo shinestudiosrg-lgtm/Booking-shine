@@ -1,420 +1,362 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Shine Self Photo Studio — Booking</title>
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<style>
-  /* ===== FONT ===== */
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap');
-
-  :root{
-    --blue-900: #003f7d;
-    --blue-700: #0056a6;
-    --yellow: #ffd000;
-    --muted: #f5f8fb;
-    --card-bg: rgba(255,255,255,0.96);
-    --accent: #063b71;
-  }
-
-  *{box-sizing:border-box}
-  body{
-    margin:0;
-    font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-    background: linear-gradient(180deg, #e9f6ff 0%, #fff9e6 100%);
-    color: var(--accent);
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    padding:24px;
-  }
-
-  /* Header */
-  header{
-    max-width:1100px;
-    margin:0 auto 18px;
-    display:flex;
-    align-items:center;
-    gap:18px;
-  }
-  .brand {
-    background: linear-gradient(90deg, rgba(0,63,125,1), rgba(0,86,166,1));
-    color: white;
-    padding: 14px 18px;
-    border-radius: 12px;
-    font-weight:800;
-    font-size:20px;
-    box-shadow: 0 6px 18px rgba(3,59,103,0.18);
-  }
-  header .subtitle { color: var(--blue-700); font-weight:700; margin-left:6px; font-size:18px; }
-
-  /* layout */
-  .container{
-    max-width:1100px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 420px;
-    gap: 24px;
-    align-items:start;
-  }
-
-  /* left column: booking form & price list */
-  .left {
-    display:flex;
-    flex-direction:column;
-    gap:20px;
-  }
-
-  /* card style */
-  .card{
-    background: var(--card-bg);
-    border-radius:14px;
-    padding:18px;
-    box-shadow: 0 8px 30px rgba(7,41,82,0.08);
-    border: 1px solid rgba(0,63,125,0.06);
-  }
-
-  label{ display:block; font-weight:700; margin-bottom:6px; color:var(--accent); }
-  input[type="text"], input[type="date"], input[type="time"], input[type="number"], select {
-    width:100%; padding:11px 12px; border-radius:10px; border:1px solid rgba(3,59,103,0.08);
-    font-size:15px; outline:none; background: #fff;
-  }
-
-  /* buttons */
-  .btn-primary{
-    background: linear-gradient(90deg,var(--yellow),#ffea66);
-    border:none;
-    color: var(--blue-900);
-    padding:12px 14px;
-    border-radius:10px;
-    font-weight:800;
-    width:100%;
-    cursor:pointer;
-    box-shadow: 0 8px 18px rgba(255,208,0,0.18);
-    margin-top:10px;
-  }
-  .btn-ghost{
-    background:transparent;
-    border:2px solid rgba(0,63,125,0.08);
-    color:var(--accent);
-    padding:10px 12px;
-    border-radius:10px;
-    cursor:pointer;
-    margin-top:8px;
-  }
-
-  pre#output{
-    background: #003f7d;
-    color: white;
-    padding:12px;
-    border-radius:8px;
-    white-space:pre-wrap;
-    font-size:14px;
-    margin-top:10px;
-  }
-
-  /* price HTML list */
-  .price-list-panel{
-    padding:12px;
-    border-radius:12px;
-    background: rgba(255,255,255,0.8);
-    box-shadow: 0 12px 40px rgba(2,45,86,0.10);
-    border: 1px solid rgba(0,63,125,0.08);
-  }
-
-  .price-section{
-    margin-bottom:18px;
-    padding-bottom:12px;
-    border-bottom:1px solid rgba(0,63,125,0.08);
-  }
-  .price-section:last-child{
-    border-bottom:none;
-    margin-bottom:0;
-    padding-bottom:0;
-  }
-
-  .price-title{
-    font-weight:800;
-    font-size:18px;
-    color:var(--blue-900);
-    margin-bottom:10px;
-  }
-
-  .price-row{
-    display:flex;
-    justify-content:space-between;
-    padding:6px 0;
-    font-weight:600;
-    color:var(--accent);
-  }
-
-  /* tutorial */
-  .tutorial{ background:#fffbe6; border:2px dashed rgba(255,208,0,0.6); padding:12px; border-radius:10px; color:var(--accent); }
-
-  /* total box */
-  .total-box{
-    margin-top:8px;
-    padding:12px;
-    border-radius:10px;
-    background: linear-gradient(180deg, rgba(0,63,125,0.06), rgba(0,63,125,0.02));
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    font-weight:800;
-    color:var(--blue-900);
-  }
-
-  /* responsive */
-  @media (max-width:980px){
-    .container{ grid-template-columns: 1fr; padding:0 6px; }
-    .right{ order:2; }
-  }
-
-  /* small helpers */
-  .muted{ color:#6b6b6b; font-weight:500; font-size:13px; }
-
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shine Studio Photobooth | Professional Event Photobooth</title>
+  <meta name="description" content="Shine Studio Photobooth menghadirkan pengalaman photobooth modern, estetik, dan profesional untuk event, cafe, wedding, birthday, dan corporate gathering." />
+  <meta name="theme-color" content="#0a4ea3" />
+  <meta property="og:title" content="Shine Studio Photobooth" />
+  <meta property="og:description" content="Photobooth profesional untuk event yang lebih seru, estetik, dan berkesan." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="site-bg"></div>
 
-<header>
-  <div class="brand">Shine</div>
-  <div class="subtitle">Self Photo Studio — Serang</div>
-</header>
+  <header class="header" id="top">
+    <div class="container nav-wrap">
+      <a href="#top" class="brand" aria-label="Shine Studio Photobooth">
+        <img src="assets/logo-shine.svg" alt="Shine Studio Photobooth" class="brand-logo" />
+        <div>
+          <span class="brand-title">Shine Studio</span>
+          <span class="brand-subtitle">Photobooth</span>
+        </div>
+      </a>
 
-<main class="container">
+      <button class="menu-toggle" id="menuToggle" aria-label="Buka menu navigasi" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
 
-  <!-- LEFT COLUMN -->
-  <section class="left">
+      <nav class="nav" id="navMenu">
+        <a href="#tentang">Tentang</a>
+        <a href="#layanan">Layanan</a>
+        <a href="#harga">Harga</a>
+        <a href="#galeri">Galeri</a>
+        <a href="#faq">FAQ</a>
+        <a href="#kontak" class="nav-cta">Hubungi Kami</a>
+      </nav>
+    </div>
+  </header>
 
-    <!-- Booking Form -->
-    <div class="card">
-      <h3 style="margin-top:0; color:var(--blue-900)">Form Booking</h3>
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <span class="eyebrow">Professional Event Photobooth</span>
+          <h1>Website photobooth yang tampil <span>premium</span>, meyakinkan, dan siap closing.</h1>
+          <p>
+            Shine Studio Photobooth menghadirkan pengalaman foto yang modern, estetik, dan praktis untuk event,
+            wedding, ulang tahun, gathering, hingga activation di cafe.
+          </p>
 
-      <label>Nama Customer</label>
-      <input id="nama" type="text" placeholder="Nama lengkap">
+          <div class="hero-actions">
+            <a href="#harga" class="btn btn-primary">Lihat Paket</a>
+            <a href="#kontak" class="btn btn-secondary">Booking Sekarang</a>
+          </div>
 
-      <label>Jumlah Orang</label>
-      <input id="jumlah" type="number" min="1" value="1" oninput="hitungTotal()">
+          <div class="hero-highlights">
+            <div>
+              <strong>100%</strong>
+              <span>Setup profesional</span>
+            </div>
+            <div>
+              <strong>Fast</strong>
+              <span>Proses cepat & rapi</span>
+            </div>
+            <div>
+              <strong>Estetik</strong>
+              <span>Desain clean premium</span>
+            </div>
+          </div>
+        </div>
 
-      <label>Pilih Kategori</label>
-      <select id="kategori" onchange="updatePaket()">
-        <option value="">-- Pilih Kategori --</option>
-        <option value="box">Foto Box</option>
-        <option value="studio">Foto Studio</option>
-      </select>
+        <div class="hero-card reveal delay-1">
+          <div class="hero-card-top">
+            <span class="badge">Most Requested</span>
+            <span class="status-dot">Available</span>
+          </div>
 
-      <label>Pilih Paket</label>
-      <select id="paket" onchange="hitungTotal()">
-        <option value="">-- Pilih paket --</option>
-      </select>
+          <h2>Photobooth Event Package</h2>
+          <p>Cocok untuk event cafe, sekolah, komunitas, birthday, hingga corporate activation.</p>
 
-      <label>Pilih Background</label>
-      <select id="background">
-        <option value="">-- Pilih background --</option>
-      </select>
+          <ul class="feature-list">
+            <li>Unlimited sesi selama durasi acara</li>
+            <li>Desain frame custom sesuai tema</li>
+            <li>File digital rapi dan mudah dibagikan</li>
+            <li>Tim standby dan ramah selama event</li>
+          </ul>
 
-      <label>Tanggal</label>
-      <input id="tanggal" type="date">
+          <div class="price-box">
+            <span>Mulai dari</span>
+            <strong>Rp 35.000</strong>
+            <small>per sesi</small>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <label>Jam</label>
-      <input id="jam" type="time">
+    <section class="section stats-section">
+      <div class="container stats-grid reveal">
+        <article class="stat-card">
+          <strong>Clean Setup</strong>
+          <p>Tampilan alat, area, dan hasil foto dibuat rapi sehingga cocok untuk event premium.</p>
+        </article>
+        <article class="stat-card">
+          <strong>Custom Branding</strong>
+          <p>Frame dan visual dapat disesuaikan dengan tema acara atau identitas brand Anda.</p>
+        </article>
+        <article class="stat-card">
+          <strong>User Friendly</strong>
+          <p>Pengunjung mudah menggunakan photobooth tanpa proses yang ribet atau membingungkan.</p>
+        </article>
+      </div>
+    </section>
 
-      <label>Kontak WA</label>
-      <input id="wa" type="text" placeholder="08xxxxxxxxxx">
+    <section class="section" id="tentang">
+      <div class="container section-grid">
+        <div class="section-copy reveal">
+          <span class="section-label">Tentang Kami</span>
+          <h2>Shine Studio Photobooth dirancang untuk membuat event terasa lebih hidup.</h2>
+          <p>
+            Kami fokus pada pengalaman photobooth yang tidak hanya seru, tetapi juga terlihat profesional.
+            Mulai dari tampilan booth, alur penggunaan, hasil foto, hingga pelayanan di lokasi, semuanya dibuat
+            untuk memberi kesan yang lebih eksklusif.
+          </p>
+          <p>
+            Cocok untuk Anda yang ingin menghadirkan photobooth modern dengan branding yang kuat, proses yang cepat,
+            dan hasil yang siap dibagikan ke tamu atau pelanggan.
+          </p>
+        </div>
 
-      <div class="total-box">
-        <div>Total</div>
-        <div id="totalDisplay">Rp 0</div>
+        <div class="info-panel reveal delay-1">
+          <div class="panel-card">
+            <h3>Kenapa pilih Shine?</h3>
+            <ul>
+              <li>Desain visual clean, premium, dan tidak berlebihan</li>
+              <li>Alur pelayanan ringkas dan profesional</li>
+              <li>Fleksibel untuk berbagai jenis event</li>
+              <li>Siap dikustom sesuai kebutuhan acara</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt-section" id="layanan">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-label">Layanan</span>
+          <h2>Layanan yang dibuat untuk event yang lebih berkesan</h2>
+          <p>Pilih jenis layanan yang paling sesuai dengan konsep acara Anda.</p>
+        </div>
+
+        <div class="service-grid">
+          <article class="service-card reveal">
+            <div class="icon-wrap">01</div>
+            <h3>Photobooth Event</h3>
+            <p>Photobooth interaktif untuk birthday, wedding, school event, community gathering, dan corporate event.</p>
+          </article>
+          <article class="service-card reveal delay-1">
+            <div class="icon-wrap">02</div>
+            <h3>Custom Frame Design</h3>
+            <p>Desain frame dapat disesuaikan dengan tema acara, brand, warna, atau campaign tertentu.</p>
+          </article>
+          <article class="service-card reveal delay-2">
+            <div class="icon-wrap">03</div>
+            <h3>Digital File Delivery</h3>
+            <p>Hasil foto digital tertata rapi sehingga mudah dibagikan dan digunakan kembali setelah acara selesai.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="harga">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-label">Harga</span>
+          <h2>Paket sederhana, jelas, dan mudah dipahami</h2>
+          <p>Struktur harga dibuat langsung ke inti agar calon pelanggan lebih cepat mengambil keputusan.</p>
+        </div>
+
+        <div class="pricing-grid">
+          <article class="pricing-card reveal featured">
+            <span class="plan-tag">Paket Utama</span>
+            <h3>Photobooth Session</h3>
+            <div class="plan-price">Rp 35.000 <span>/ sesi</span></div>
+            <p class="plan-desc">Paket inti untuk pelanggan yang ingin pengalaman photobooth praktis dan menarik.</p>
+            <ul>
+              <li>1 sesi foto photobooth</li>
+              <li>Tampilan booth estetik dan profesional</li>
+              <li>Hasil foto digital</li>
+              <li>Cocok untuk event cafe dan activation</li>
+            </ul>
+            <a href="#kontak" class="btn btn-primary btn-full">Pesan Paket Ini</a>
+          </article>
+
+          <article class="pricing-note reveal delay-1">
+            <h3>Catatan Penting</h3>
+            <p>
+              Paket dibuat sederhana supaya lebih mudah dijual dan dipahami pelanggan. Anda bisa mengganti isi paket,
+              deskripsi, atau CTA kapan saja langsung dari file HTML.
+            </p>
+            <div class="mini-note">
+              <strong>Siap GitHub Pages</strong>
+              <span>Langsung upload folder ini ke repository dan publish.</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt-section" id="galeri">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-label">Galeri Preview</span>
+          <h2>Tampilan yang clean dan dipercaya pelanggan</h2>
+          <p>Gunakan bagian ini untuk menampilkan hasil event, template frame, atau suasana booth Anda.</p>
+        </div>
+
+        <div class="gallery-grid">
+          <div class="gallery-card reveal">
+            <span>Event Setup</span>
+            <strong>Area photobooth rapi dan premium</strong>
+          </div>
+          <div class="gallery-card reveal delay-1">
+            <span>Frame Custom</span>
+            <strong>Visual sesuai tema acara</strong>
+          </div>
+          <div class="gallery-card reveal delay-2">
+            <span>Digital Result</span>
+            <strong>File hasil tersusun dan mudah dibagikan</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-label">Cara Kerja</span>
+          <h2>Alur booking yang simple untuk calon pelanggan</h2>
+        </div>
+
+        <div class="steps-grid">
+          <article class="step-card reveal">
+            <span>01</span>
+            <h3>Hubungi Admin</h3>
+            <p>Pelanggan menghubungi admin untuk tanya jadwal, konsep event, dan kebutuhan photobooth.</p>
+          </article>
+          <article class="step-card reveal delay-1">
+            <span>02</span>
+            <h3>Diskusi Detail</h3>
+            <p>Tentukan tema visual, kebutuhan event, lokasi, dan konsep frame agar sesuai acara.</p>
+          </article>
+          <article class="step-card reveal delay-2">
+            <span>03</span>
+            <h3>Event Berjalan</h3>
+            <p>Tim menyiapkan photobooth dengan tampilan profesional agar tamu menikmati pengalaman foto terbaik.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt-section testimonial-section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="section-label">Kesan Profesional</span>
+          <h2>Website ini dibuat untuk membantu brand Anda terlihat lebih terpercaya</h2>
+        </div>
+
+        <div class="testimonial-card reveal">
+          <p>
+            “Tampilan yang profesional membuat calon pelanggan lebih cepat percaya, lebih mudah memahami paket,
+            dan lebih yakin untuk menghubungi admin.”
+          </p>
+          <strong>— Shine Studio Photobooth</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container faq-wrap">
+        <div class="section-head reveal">
+          <span class="section-label">FAQ</span>
+          <h2>Pertanyaan yang sering ditanyakan</h2>
+        </div>
+
+        <div class="faq-list reveal delay-1">
+          <details>
+            <summary>Apakah desain frame bisa disesuaikan dengan tema acara?</summary>
+            <p>Ya, desain frame bisa dibuat menyesuaikan tema event, warna brand, atau kebutuhan visual tertentu.</p>
+          </details>
+          <details>
+            <summary>Apakah website ini bisa langsung dipakai di GitHub Pages?</summary>
+            <p>Bisa. Struktur file sudah dibuat sederhana sehingga mudah di-upload ke GitHub dan dipublish.</p>
+          </details>
+          <details>
+            <summary>Bagaimana jika saya ingin mengganti harga atau kontak?</summary>
+            <p>Anda cukup edit teks di file HTML dan link kontak di beberapa tombol tanpa perlu sistem yang rumit.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta-section" id="kontak">
+      <div class="container cta-box reveal">
+        <div>
+          <span class="section-label light">Mulai Sekarang</span>
+          <h2>Siap tampil lebih profesional untuk calon pelanggan Anda?</h2>
+          <p>Gunakan website ini sebagai landing page resmi Shine Studio Photobooth dan langsung upload ke GitHub.</p>
+        </div>
+        <div class="cta-actions">
+          <a class="btn btn-light" href="https://api.whatsapp.com/send?phone=6281234567890&text=Halo%20Shine%20Studio%20Photobooth%2C%20saya%20ingin%20booking." target="_blank" rel="noopener noreferrer">Chat WhatsApp</a>
+          <a class="btn btn-outline-light" href="https://www.instagram.com/shine.photostudio_id?igsh=MXczNTVnZGsyMWR3Mw==" target="_blank" rel="noopener noreferrer">Instagram</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <a href="#top" class="brand footer-brand">
+          <img src="assets/logo-shine.svg" alt="Shine Studio Photobooth" class="brand-logo" />
+          <div>
+            <span class="brand-title">Shine Studio</span>
+            <span class="brand-subtitle">Photobooth</span>
+          </div>
+        </a>
+        <p class="footer-copy">Photobooth modern, estetik, dan profesional untuk event yang lebih berkesan.</p>
       </div>
 
-      <button class="btn-primary" onclick="generate()">Generate Booking</button>
-      <button class="btn-ghost" onclick="copyText()">Copy Pesan</button>
-      <button class="btn-ghost" onclick="sendWA()">Kirim ke WhatsApp Admin</button>
-
-      <pre id="output" aria-live="polite"></pre>
-    </div>
-
-    <!-- Tutorial -->
-    <div class="card tutorial">
-      <h4 style="margin:0 0 8px 0">📘 Cara Booking</h4>
-      <ol style="margin:0 0 0 18px; padding:0; color:#123456">
-        <li>Pilih <strong>kategori</strong>.</li>
-        <li>Pilih <strong>paket</strong>.</li>
-        <li>Pilih <strong>background</strong>.</li>
-        <li>Isi <strong>jumlah orang</strong>, tanggal, dan jam.</li>
-        <li>Cek <strong>total harga</strong>.</li>
-        <li>Klik <strong>Generate Booking</strong>.</li>
-        <li>Kirim pesan ke admin.</li>
-      </ol>
-      <div class="muted" style="margin-top:8px">Format WA tanpa tanda +, contoh: 62812xxxx</div>
-    </div>
-
-  </section>
-
-  <!-- RIGHT COLUMN -->
-  <aside class="right">
-
-    <div class="card price-list-panel">
-      <h3 style="margin:0 0 12px 0; color:var(--blue-900)">Price List</h3>
-
-      <div class="price-section">
-        <div class="price-title">FOTO BOX</div>
-        <div class="price-row"><span>Basic</span><span>10k</span></div>
-        <div class="price-row"><span>Premium</span><span>20k</span></div>
-        <div class="price-row"><span>Gold</span><span>25k</span></div>
+      <div class="footer-links">
+        <a href="#tentang">Tentang</a>
+        <a href="#layanan">Layanan</a>
+        <a href="#harga">Harga</a>
+        <a href="#faq">FAQ</a>
       </div>
 
-      <div class="price-section">
-        <div class="price-title">FOTO STUDIO</div>
-        <div class="price-row"><span>Basic</span><span>15k</span></div>
-        <div class="price-row"><span>Premium</span><span>25k</span></div>
-        <div class="price-row"><span>Gold</span><span>35k</span></div>
-        <div class="price-row"><span>Special Bundling</span><span>80k</span></div>
-        <div class="price-row"><span>Special Group</span><span>150k</span></div>
-        <div class="price-row"><span>Special Family</span><span>200k</span></div>
+      <div class="footer-links">
+        <a href="https://www.instagram.com/shine.photostudio_id?igsh=MXczNTVnZGsyMWR3Mw==" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="https://www.tiktok.com/@shine.photostudio_id?_r=1&_t=ZS-91zsRfCge1a" target="_blank" rel="noopener noreferrer">TikTok</a>
+        <a href="https://maps.app.goo.gl/3smxRxZiVW4notEk6?g_st=ipc" target="_blank" rel="noopener noreferrer">Lokasi</a>
       </div>
-
-      <div class="price-section">
-        <div class="price-title">ADDITIONAL</div>
-        <div class="price-row"><span>Tambahan / Orang</span><span>25k</span></div>
-        <div class="price-row"><span>Tambahan / 10 menit</span><span>20k</span></div>
-        <div class="price-row"><span>Cetakan Foto / Strip</span><span>10k</span></div>
-        <div class="price-row"><span>Cetakan Premium</span><span>15k</span></div>
-        <div class="price-row"><span>Premium Props</span><span>5k - 10k</span></div>
-      </div>
-
     </div>
 
-    <!-- quick contact -->
-    <div class="card">
-      <h4 style="margin:0 0 8px 0; color:var(--blue-700)">Kontak & Lokasi</h4>
-      <div class="muted">📍 Perum. Persada Banten, Blok A7 no.4</div>
-      <div style="height:10px"></div>
-      <div class="muted">📱 WA Admin: <strong>+62 838-9403-6552</strong></div>
-      <button class="btn-primary" style="margin-top:8px" onclick="location.href='https://wa.me/6283894036552'">Chat Admin</button>
+    <div class="container footer-bottom">
+      <p>© 2026 Shine Studio Photobooth. All rights reserved.</p>
+      <p>Ready for GitHub Pages.</p>
     </div>
+  </footer>
 
-  </aside>
+  <a class="floating-wa" href="https://api.whatsapp.com/send?phone=6281234567890&text=Halo%20Shine%20Studio%20Photobooth%2C%20saya%20ingin%20tanya%20paket." target="_blank" rel="noopener noreferrer" aria-label="Chat WhatsApp">
+    WA
+  </a>
 
-</main>
-
-<script>
-/* ===== DATA ===== */
-const paketData = {
-  box: [
-    { label: "Basic - 10k", price: 10000 },
-    { label: "Premium - 20k", price: 20000 },
-    { label: "Gold - 25k", price: 25000 }
-  ],
-  studio: [
-    { label: "Basic - 15k", price: 15000 },
-    { label: "Premium - 25k", price: 25000 },
-    { label: "Gold - 35k", price: 35000 },
-    { label: "Special Bundling - 80k", price: 80000 },
-    { label: "Special Group - 150k", price: 150000 },
-    { label: "Special Family - 200k", price: 200000 }
-  ]
-};
-
-const bgData = {
-  box: ["Coklat","Biru","Tahanan"],
-  studio: ["Beige","Sky Blue","Putih","Abu-abu","Tirai"]
-};
-
-/* ===== HELPERS ===== */
-function rupiah(n){
-  if (isNaN(n) || n === null) return "Rp 0";
-  return "Rp " + n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-}
-
-/* DOM refs */
-const elKategori = document.getElementById('kategori');
-const elPaket = document.getElementById('paket');
-const elBackground = document.getElementById('background');
-const elJumlah = document.getElementById('jumlah');
-const elOutput = document.getElementById('output');
-const elTotalDisplay = document.getElementById('totalDisplay');
-
-/* Events */
-function updatePaket(){
-  const k = elKategori.value;
-  elPaket.innerHTML = "<option value=''>-- Pilih paket --</option>";
-  elBackground.innerHTML = "<option value=''>-- Pilih background --</option>";
-
-  if(!k) { hitungTotal(); return; }
-
-  (paketData[k]||[]).forEach(p=>{
-    const opt = document.createElement('option');
-    opt.value = p.price;
-    opt.textContent = p.label;
-    elPaket.appendChild(opt);
-  });
-
-  (bgData[k]||[]).forEach(b=>{
-    const opt = document.createElement('option');
-    opt.value = b;
-    opt.textContent = b;
-    elBackground.appendChild(opt);
-  });
-
-  hitungTotal();
-}
-
-function hitungTotal(){
-  const price = Number(elPaket.value) || 0;
-  const jumlah = Number(elJumlah.value) || 0;
-  const total = price * jumlah;
-  elTotalDisplay.textContent = rupiah(total);
-  return total;
-}
-
-function generate(){
-  const nama = document.getElementById('nama').value || '-';
-  const jumlah = Number(elJumlah.value) || 0;
-  const kategori = elKategori.value ? (elKategori.value === 'box' ? 'Foto Box' : 'Foto Studio') : '-';
-  const paketText = elPaket.options[elPaket.selectedIndex] ? elPaket.options[elPaket.selectedIndex].text : '-';
-  const background = elBackground.value || '-';
-  const tanggal = document.getElementById('tanggal').value || '-';
-  const jam = document.getElementById('jam').value || '-';
-  const wa = document.getElementById('wa').value || '-';
-  const total = hitungTotal();
-
-  const message =
-`📸 *BOOKING SHINE SELF PHOTO STUDIO*
-━━━━━━━━━━━━━━━━━━
-👤 Nama: ${nama}
-👥 Jumlah Orang: ${jumlah}
-🏷 Kategori: ${kategori}
-📦 Paket: ${paketText}
-🎨 Background: ${background}
-💰 Total Harga: ${rupiah(total)}
-📅 Tanggal: ${tanggal}
-⏰ Jam: ${jam}
-📱 Kontak WA: ${wa}
-━━━━━━━━━━━━━━━━━━
-Terima kasih sudah booking 🤍`;
-
-  elOutput.textContent = message;
-  elOutput.scrollIntoView({behavior:'smooth'});
-}
-
-function copyText(){
-  const text = elOutput.innerText;
-  if(!text) return alert("Generate dulu pesan bookingnya.");
-  navigator.clipboard.writeText(text).then(()=> alert("Pesan berhasil disalin!"));
-}
-
-function sendWA(){
-  const text = elOutput.innerText;
-  if(!text) return alert("Generate dulu pesan bookingnya.");
-  const nomor = "6283894036552";
-  const url = "https://wa.me/" + nomor + "?text=" + encodeURIComponent(text);
-  window.open(url,"_blank");
-}
-
-document.addEventListener('DOMContentLoaded', ()=> updatePaket());
-</script>
-
+  <script src="script.js"></script>
 </body>
 </html>

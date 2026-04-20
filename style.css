@@ -507,6 +507,7 @@ a {
   line-height: 1.8;
 }
 
+/* PORTOFOLIO */
 .portfolio-grid {
   display: grid;
   grid-template-columns: 1.25fr 1fr 1fr;
@@ -525,15 +526,15 @@ a {
   grid-row: span 2;
 }
 
-.portfolio-image {
-  min-height: 280px;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+.portfolio-photo {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  display: block;
 }
 
-.portfolio-card.large .portfolio-image {
-  min-height: 420px;
+.portfolio-card.large .portfolio-photo {
+  height: 420px;
 }
 
 .portfolio-content {
@@ -738,9 +739,9 @@ a {
     min-height: 120px;
   }
 
-  .portfolio-image,
-  .portfolio-card.large .portfolio-image {
-    min-height: 240px;
+  .portfolio-photo,
+  .portfolio-card.large .portfolio-photo {
+    height: 240px;
   }
 
   .footer-wrap {

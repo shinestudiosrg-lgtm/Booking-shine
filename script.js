@@ -1,6 +1,8 @@
 const menuToggle = document.getElementById("menuToggle");
 const navMenu = document.getElementById("navMenu");
 const navLinks = document.querySelectorAll(".nav-menu a");
+const packageButtons = document.querySelectorAll(".package-btn");
+const paketDipilih = document.getElementById("paketDipilih");
 
 if (menuToggle && navMenu) {
   menuToggle.addEventListener("click", () => {
@@ -16,6 +18,15 @@ navLinks.forEach((link) => {
   });
 });
 
+packageButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const selectedPackage = button.getAttribute("data-package");
+    if (paketDipilih && selectedPackage) {
+      paketDipilih.value = selectedPackage;
+    }
+  });
+});
+
 const bookingForm = document.getElementById("bookingForm");
 
 if (bookingForm) {
@@ -25,7 +36,7 @@ if (bookingForm) {
     const nama = document.getElementById("nama").value.trim();
     const telepon = document.getElementById("telepon").value.trim();
     const jenisAcara = document.getElementById("jenisAcara").value;
-    const paketDipilih = document.getElementById("paketDipilih").value;
+    const paket = document.getElementById("paketDipilih").value;
     const tanggal = document.getElementById("tanggal").value;
     const lokasi = document.getElementById("lokasi").value.trim();
     const detail = document.getElementById("detail").value.trim();
@@ -37,7 +48,7 @@ if (bookingForm) {
 Nama Lengkap: ${nama}
 Nomor WhatsApp: ${telepon}
 Jenis Acara: ${jenisAcara}
-Paket: ${paketDipilih}
+Paket: ${paket}
 Tanggal Acara: ${tanggal}
 Lokasi Acara: ${lokasi}
 Detail Kebutuhan: ${detail}`;

@@ -1,22 +1,14 @@
 const menuToggle = document.getElementById("menuToggle");
 const navMenu = document.getElementById("navMenu");
+const navLinks = document.querySelectorAll(".nav-menu a");
 
 menuToggle.addEventListener("click", () => {
   navMenu.classList.toggle("show");
 });
 
-document.querySelectorAll(".faq-question").forEach((button) => {
-  button.addEventListener("click", () => {
-    const answer = button.nextElementSibling;
-    const isOpen = answer.style.maxHeight;
-
-    document.querySelectorAll(".faq-answer").forEach((item) => {
-      item.style.maxHeight = null;
-    });
-
-    if (!isOpen) {
-      answer.style.maxHeight = answer.scrollHeight + "px";
-    }
+navLinks.forEach((link) => {
+  link.addEventListener("click", () => {
+    navMenu.classList.remove("show");
   });
 });
 
@@ -25,18 +17,27 @@ const bookingForm = document.getElementById("bookingForm");
 bookingForm.addEventListener("submit", function (e) {
   e.preventDefault();
 
-  const nama = document.getElementById("nama").value;
-  const acara = document.getElementById("acara").value;
+  const nama = document.getElementById("nama").value.trim();
+  const telepon = document.getElementById("telepon").value.trim();
+  const jenisAcara = document.getElementById("jenisAcara").value;
+  const paketDipilih = document.getElementById("paketDipilih").value;
   const tanggal = document.getElementById("tanggal").value;
-  const pesan = document.getElementById("pesan").value;
+  const lokasi = document.getElementById("lokasi").value.trim();
+  const detail = document.getElementById("detail").value.trim();
 
-  const nomorWA = "6281234567890"; // GANTI DENGAN NOMOR ADMIN KAMU
+  const nomorAdmin = "6283894036552";
 
-  const text = `Halo Shine Studio, saya mau booking photobooth.%0A%0A` +
-    `Nama: ${encodeURIComponent(nama)}%0A` +
-    `Jenis acara: ${encodeURIComponent(acara)}%0A` +
-    `Tanggal acara: ${encodeURIComponent(tanggal)}%0A` +
-    `Detail: ${encodeURIComponent(pesan)}`;
+  const pesan =
+`Halo Shine Studio Photobooth, saya ingin booking.
 
-  window.open(`https://wa.me/${nomorWA}?text=${text}`, "_blank");
+Nama Lengkap: ${nama}
+Nomor WhatsApp: ${telepon}
+Jenis Acara: ${jenisAcara}
+Paket: ${paketDipilih}
+Tanggal Acara: ${tanggal}
+Lokasi Acara: ${lokasi}
+Detail Kebutuhan: ${detail}`;
+
+  const url = `https://wa.me/${nomorAdmin}?text=${encodeURIComponent(pesan)}`;
+  window.open(url, "_blank");
 });
